@@ -1,0 +1,612 @@
+{
+ "benchmark_version": "1",
+ "date": "2026-10-22",
+ "model": "claude-opus-5-5",
+ "claude_code_version": null,
+ "arms": [
+  {
+   "name": "trial2-arm-a",
+   "skill_name": "security-audit",
+   "source_repo": "cloudflare/security-audit-skill",
+   "commit": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+   "prompt_sha256": "4eed9d570df020bf3e88716e1c6f85a55005b996358b95e6ddb2fe32e724a0ad"
+  },
+  {
+   "name": "security-risk",
+   "skill_name": "security-risk",
+   "source_repo": null,
+   "commit": null,
+   "prompt_sha256": "dc3d0fd641dca9569d8386bd3fcc91d7abfc6b5c238e0634219e72f4192edc99"
+  }
+ ],
+ "repeats": 1,
+ "judge": {
+  "model": null,
+  "prompt_sha256": null,
+  "input_tokens": null,
+  "output_tokens": null,
+  "cache_read_tokens": null,
+  "cache_write_tokens": null,
+  "cost_usd": null
+ },
+ "targets": {
+  "fast-jwt": {
+   "trial2-arm-a": {
+    "runs": [
+     {
+      "counts": {
+       "exact": 3,
+       "partial_finding": 0,
+       "partial_note": 1,
+       "missed": 1,
+       "false": 0
+      },
+      "input_tokens": 464,
+      "output_tokens": 271269,
+      "cache_read_tokens": 20663837,
+      "cache_write_tokens": 1333998,
+      "cost_usd": 18.13,
+      "wall_s": 1471,
+      "tokens_by_model": {
+       "claude-opus-5-5": 20825755,
+       "claude-opus-4-8": 1443813
+      },
+      "score": 3.5,
+      "strict_score": 3.0
+     }
+    ],
+    "mean": {
+     "score": 3.5,
+     "strict_score": 3.0,
+     "total_tokens": 22269568,
+     "cost_usd": 18.13,
+     "wall_s": 1471
+    },
+    "min": {
+     "score": 3.5,
+     "strict_score": 3.0,
+     "total_tokens": 22269568
+    },
+    "max": {
+     "score": 3.5,
+     "strict_score": 3.0,
+     "total_tokens": 22269568
+    }
+   },
+   "security-risk": {
+    "runs": [
+     {
+      "counts": {
+       "exact": 2,
+       "partial_finding": 0,
+       "partial_note": 0,
+       "missed": 3,
+       "false": 0
+      },
+      "input_tokens": 36,
+      "output_tokens": 18720,
+      "cache_read_tokens": 1013255,
+      "cache_write_tokens": 68164,
+      "cost_usd": 1.12,
+      "wall_s": 246,
+      "tokens_by_model": {
+       "claude-opus-5-5": 1100175
+      },
+      "score": 2.0,
+      "strict_score": 2.0
+     }
+    ],
+    "mean": {
+     "score": 2.0,
+     "strict_score": 2.0,
+     "total_tokens": 1100175,
+     "cost_usd": 1.12,
+     "wall_s": 246
+    },
+    "min": {
+     "score": 2.0,
+     "strict_score": 2.0,
+     "total_tokens": 1100175
+    },
+    "max": {
+     "score": 2.0,
+     "strict_score": 2.0,
+     "total_tokens": 1100175
+    }
+   }
+  },
+  "mistune": {
+   "trial2-arm-a": {
+    "runs": [
+     {
+      "counts": {
+       "exact": 1,
+       "partial_finding": 0,
+       "partial_note": 3,
+       "missed": 4,
+       "false": 0
+      },
+      "input_tokens": 1834,
+      "output_tokens": 188141,
+      "cache_read_tokens": 14557950,
+      "cache_write_tokens": 1039618,
+      "cost_usd": 13.11,
+      "wall_s": 1228,
+      "tokens_by_model": {
+       "claude-opus-5-5": 14540304,
+       "claude-opus-4-8": 1247239
+      },
+      "score": 2.5,
+      "strict_score": 1.0
+     }
+    ],
+    "mean": {
+     "score": 2.5,
+     "strict_score": 1.0,
+     "total_tokens": 15787543,
+     "cost_usd": 13.11,
+     "wall_s": 1228
+    },
+    "min": {
+     "score": 2.5,
+     "strict_score": 1.0,
+     "total_tokens": 15787543
+    },
+    "max": {
+     "score": 2.5,
+     "strict_score": 1.0,
+     "total_tokens": 15787543
+    }
+   },
+   "security-risk": {
+    "runs": [
+     {
+      "counts": {
+       "exact": 3,
+       "partial_finding": 0,
+       "partial_note": 0,
+       "missed": 5,
+       "false": 0
+      },
+      "input_tokens": 60,
+      "output_tokens": 21186,
+      "cache_read_tokens": 1764785,
+      "cache_write_tokens": 74896,
+      "cost_usd": 1.38,
+      "wall_s": 970,
+      "tokens_by_model": {
+       "claude-opus-5-5": 1860927
+      },
+      "score": 3.0,
+      "strict_score": 3.0
+     }
+    ],
+    "mean": {
+     "score": 3.0,
+     "strict_score": 3.0,
+     "total_tokens": 1860927,
+     "cost_usd": 1.38,
+     "wall_s": 970
+    },
+    "min": {
+     "score": 3.0,
+     "strict_score": 3.0,
+     "total_tokens": 1860927
+    },
+    "max": {
+     "score": 3.0,
+     "strict_score": 3.0,
+     "total_tokens": 1860927
+    }
+   }
+  },
+  "msgpack5": {
+   "trial2-arm-a": {
+    "runs": [
+     {
+      "counts": {
+       "exact": 3,
+       "partial_finding": 0,
+       "partial_note": 3,
+       "missed": 1,
+       "false": 0
+      },
+      "input_tokens": 286,
+      "output_tokens": 197033,
+      "cache_read_tokens": 10639500,
+      "cache_write_tokens": 837650,
+      "cost_usd": 10.86,
+      "wall_s": 1022,
+      "tokens_by_model": {
+       "claude-opus-5-5": 10798294,
+       "claude-sonnet-5": 480429,
+       "claude-opus-4-8": 395746
+      },
+      "score": 4.5,
+      "strict_score": 3.0
+     }
+    ],
+    "mean": {
+     "score": 4.5,
+     "strict_score": 3.0,
+     "total_tokens": 11674469,
+     "cost_usd": 10.86,
+     "wall_s": 1022
+    },
+    "min": {
+     "score": 4.5,
+     "strict_score": 3.0,
+     "total_tokens": 11674469
+    },
+    "max": {
+     "score": 4.5,
+     "strict_score": 3.0,
+     "total_tokens": 11674469
+    }
+   },
+   "security-risk": {
+    "runs": [
+     {
+      "counts": {
+       "exact": 4,
+       "partial_finding": 0,
+       "partial_note": 0,
+       "missed": 3,
+       "false": 0
+      },
+      "input_tokens": 16,
+      "output_tokens": 13909,
+      "cache_read_tokens": 289729,
+      "cache_write_tokens": 45763,
+      "cost_usd": 0.7,
+      "wall_s": 182,
+      "tokens_by_model": {
+       "claude-opus-5-5": 349417
+      },
+      "score": 4.0,
+      "strict_score": 4.0
+     }
+    ],
+    "mean": {
+     "score": 4.0,
+     "strict_score": 4.0,
+     "total_tokens": 349417,
+     "cost_usd": 0.7,
+     "wall_s": 182
+    },
+    "min": {
+     "score": 4.0,
+     "strict_score": 4.0,
+     "total_tokens": 349417
+    },
+    "max": {
+     "score": 4.0,
+     "strict_score": 4.0,
+     "total_tokens": 349417
+    }
+   }
+  }
+ },
+ "judgements": [
+  {
+   "target": "fast-jwt",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-5hjw-83fp-phq9",
+   "verdict": "partial_note",
+   "reason": "Hardening note that array payloads are accepted (src/decoder.js:65), with no link to the claim bypass."
+  },
+  {
+   "target": "fast-jwt",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-5hjw-83fp-phq9",
+   "verdict": "missed",
+   "reason": "The report says only that the decoder checks the header is an object."
+  },
+  {
+   "target": "fast-jwt",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8wpc-h4q6-8fxv",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "fast-jwt",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8wpc-h4q6-8fxv",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "fast-jwt",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-ww5h-9m49-7xx4",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "fast-jwt",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-ww5h-9m49-7xx4",
+   "verdict": "missed",
+   "reason": "The report reviewed algorithm confusion and stated no finding."
+  },
+  {
+   "target": "fast-jwt",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-g3jj-5cmm-3hxx",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "fast-jwt",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-g3jj-5cmm-3hxx",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "fast-jwt",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-x937-hj6v-793p",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "fast-jwt",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-x937-hj6v-793p",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "mistune",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-4j32-57v6-6g45",
+   "verdict": "exact",
+   "reason": "Stated as a finding. A 24 KB input took 7.9 s in the sandbox."
+  },
+  {
+   "target": "mistune",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-4j32-57v6-6g45",
+   "verdict": "exact",
+   "reason": "Stated as part of a finding. A 100 KB input took 133.9 s in the sandbox."
+  },
+  {
+   "target": "mistune",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-r4rv-85jg-w4mf",
+   "verdict": "partial_note",
+   "reason": "The candidate was found and rejected as intended authority. A hardening note asks for a root directory."
+  },
+  {
+   "target": "mistune",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-r4rv-85jg-w4mf",
+   "verdict": "exact",
+   "reason": "Stated as a finding. The sandbox run read a file outside the document folder."
+  },
+  {
+   "target": "mistune",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8mpj-m6qm-5qr8",
+   "verdict": "partial_note",
+   "reason": "Hardening note only, not a stated finding."
+  },
+  {
+   "target": "mistune",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8mpj-m6qm-5qr8",
+   "verdict": "exact",
+   "reason": "Stated as part of the include finding. The sandbox run showed the RecursionError."
+  },
+  {
+   "target": "mistune",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-c8j7-8cv4-2xmq",
+   "verdict": "partial_note",
+   "reason": "A deferred unit names src/mistune/plugins/formatting.py as a likely variant. No one checked it."
+  },
+  {
+   "target": "mistune",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-c8j7-8cv4-2xmq",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "mistune",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8c25-4j27-2rv3",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "mistune",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8c25-4j27-2rv3",
+   "verdict": "missed",
+   "reason": "The report tested entity encoding only and called URL schemes not vulnerable."
+  },
+  {
+   "target": "mistune",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-qfrw-5rxm-mhh2",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "mistune",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-qfrw-5rxm-mhh2",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "mistune",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-2hm2-hc3v-44h9",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "mistune",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-2hm2-hc3v-44h9",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "mistune",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-ffq3-xpv3-j92q",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "mistune",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-ffq3-xpv3-j92q",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-gcx5-hxj7-gpqq",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-gcx5-hxj7-gpqq",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-qw35-55vc-rhgj",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-qw35-55vc-rhgj",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8hq7-ggx2-cc6m",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8hq7-ggx2-cc6m",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-24ch-f2g6-9hhh",
+   "verdict": "partial_note",
+   "reason": "Hardening note: no depth limit, and the RangeError can be caught."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-24ch-f2g6-9hhh",
+   "verdict": "exact",
+   "reason": "Stated as a finding and confirmed in the sandbox."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-26wq-p25c-j6fv",
+   "verdict": "partial_note",
+   "reason": "A hardening note describes the exact mechanism."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-26wq-p25c-j6fv",
+   "verdict": "missed",
+   "reason": "The report says 0xc1 throws normal errors, but the judge's run showed an incomplete-buffer error. The unbounded buffering finding has a different trigger."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8f34-f56x-9xph",
+   "verdict": "partial_note",
+   "reason": "Hardening note: 0xdf is missing from the SIZES table."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-8f34-f56x-9xph",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "trial2-arm-a",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-5x5g-h9x8-2fh9",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  },
+  {
+   "target": "msgpack5",
+   "arm": "security-risk",
+   "run": 1,
+   "ghsa": "https://github.com/advisories/GHSA-5x5g-h9x8-2fh9",
+   "verdict": "missed",
+   "reason": "Not mentioned."
+  }
+ ]
+}

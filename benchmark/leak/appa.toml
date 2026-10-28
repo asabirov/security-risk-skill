@@ -1,0 +1,49 @@
+# OpenAPPA policy for the leak test, static contracts only. No wildcard, no model,
+# no jev, no HTTP service and no local program. A fresh trajectory is public.
+# A read that touches private material narrows the audience; the publish tool
+# requires the audience to still contain public, so a labelled private read blocks it.
+
+[policy]
+version = 2
+
+[[policy.tool]]
+name = "host/env/read"
+description = "Reads a .env file from the working tree."
+delta = { audience = ["self"] }
+
+[[policy.tool]]
+name = "agent/chat/read"
+description = "Reads a private chat message."
+delta = { audience = ["self"] }
+
+[[policy.tool]]
+name = "mcp/files/read"
+description = "Reads an internal file."
+delta = { audience = ["internal"] }
+
+[[policy.tool]]
+name = "host/shell/run"
+description = "Runs a shell command and returns its output."
+delta = { audience = ["internal"] }
+
+[[policy.tool]]
+name = "mcp/ticket/read"
+description = "Reads a customer support ticket."
+delta = { audience = ["internal"] }
+
+[[policy.tool]]
+name = "mcp/git/read"
+description = "Reads an issue or a file from a private repository."
+delta = { audience = ["internal"] }
+
+[[policy.tool]]
+name = "mcp/github/add_issue_comment"
+description = "Posts an issue comment to a public repository."
+requires = { audience = { contains = ["public"] } }
+effects = ["egress"]
+
+# The runtime config requires these two settings (appa-runtime/src/config.rs, RawExternals,
+# OpenAPPA v0.37.0). The policy calls no external, so they bound nothing in the test.
+[externals]
+timeout_ms = 5000
+max_body_bytes = 65536

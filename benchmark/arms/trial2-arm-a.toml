@@ -1,0 +1,9 @@
+# Trial 2 arm A: another party's skill, full audit mode, quick profile. Pinned commit, no affiliation (see README).
+name = "trial2-arm-a"
+skill_name = "security-audit"
+source_repo = "cloudflare/security-audit-skill"
+commit = "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8"
+skill_path = "skills/security-audit"
+prompt = "../prompts/security-audit-full-quick.md"
+[env]
+CLAUDE_CODE_SUBAGENT_MODEL = "claude-opus-5-5"

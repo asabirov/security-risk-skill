@@ -1,0 +1,73 @@
+# Three public libraries, each pinned to the parent of the earliest fix of its advisory batch.
+# Advisory links use the https://github.com/advisories/GHSA-... form. "advisories" lists the defects that count.
+
+[fast-jwt]
+repo = "https://github.com/nearform/fast-jwt"
+commit = "80637c8c906a14fc3ef6cc00c2854844e451693a"
+fix_commit = "86e83efd8b5244f50859532d99244f0a9a9a4368"
+language = "JavaScript"
+licence = "Apache-2.0"
+image = "node@sha256:06d7adf3e0ef61a13f1d28682726366f97a15aa1888c934d3ecec86c33918b53"
+deps_sub = "node_modules"
+deps_mount = "/work/node_modules"
+env = []
+runtime_note = "Node.js 24. The target's dependencies and devDependencies are installed read-only at /work/node_modules, so `require` from /work/target or /work/scratch resolves them."
+example = "node /work/scratch/check.js"
+advisories = [
+  "https://github.com/advisories/GHSA-5hjw-83fp-phq9",
+  "https://github.com/advisories/GHSA-8wpc-h4q6-8fxv",
+  "https://github.com/advisories/GHSA-ww5h-9m49-7xx4",
+  "https://github.com/advisories/GHSA-g3jj-5cmm-3hxx",
+  "https://github.com/advisories/GHSA-x937-hj6v-793p",
+]
+excluded = { "https://github.com/advisories/GHSA-687g-22h4-j4w4" = "the fix commit is already in the audited commit" }
+
+[mistune]
+repo = "https://github.com/lepture/mistune"
+commit = "e790d7e021c334b2baef0fc607d1be24c1ecc52d"
+fix_commit = "5de41fb8e527004dbc363e047a3c380c9288c74f"
+language = "Python"
+licence = "BSD-3-Clause"
+image = "python@sha256:c50ccfb66e5cc97a610dcd0b9597de6ef5b52c96280b51997b353a0fc87a8361"
+deps_sub = ""
+deps_mount = "/work/pydeps"
+env = ["PYTHONPATH=/work/target/src:/work/pydeps", "PYTHONDONTWRITEBYTECODE=1"]
+runtime_note = "Python 3.13. PYTHONPATH holds /work/target/src and /work/pydeps, where pytest is installed read-only."
+example = "python /work/scratch/check.py"
+pip = ["pytest==9.0.2", "pytest-cov==7.0.0", "coverage==7.13.0", "iniconfig==2.3.0", "packaging==25.0", "pluggy==1.6.0", "pygments==2.19.2"]
+advisories = [
+  "https://github.com/advisories/GHSA-4j32-57v6-6g45",
+  "https://github.com/advisories/GHSA-r4rv-85jg-w4mf",
+  "https://github.com/advisories/GHSA-8mpj-m6qm-5qr8",
+  "https://github.com/advisories/GHSA-c8j7-8cv4-2xmq",
+  "https://github.com/advisories/GHSA-8c25-4j27-2rv3",
+  "https://github.com/advisories/GHSA-qfrw-5rxm-mhh2",
+  "https://github.com/advisories/GHSA-2hm2-hc3v-44h9",
+  "https://github.com/advisories/GHSA-ffq3-xpv3-j92q",
+]
+[mistune.excluded]
+"https://github.com/advisories/GHSA-g97x-gvcm-x72h" = "the class option is already escaped at the audited commit"
+"https://github.com/advisories/GHSA-qcq2-496w-v96p" = "a run of 6400 brackets takes 0.05 s at the audited commit"
+"https://github.com/advisories/GHSA-6m44-fpc8-c3rq" = "the defect came in with release 3.3.0, after the audited commit"
+
+[msgpack5]
+repo = "https://github.com/mcollina/msgpack5"
+commit = "5839065616704fde29eb6ac3398b4159974b06e0"
+fix_commit = "15443a1f2aa682a6aa37f1705ac628de5b866ad1"
+language = "JavaScript"
+licence = "MIT"
+image = "node@sha256:06d7adf3e0ef61a13f1d28682726366f97a15aa1888c934d3ecec86c33918b53"
+deps_sub = "node_modules"
+deps_mount = "/work/node_modules"
+env = []
+runtime_note = "Node.js 24. The target's dependencies and devDependencies are installed read-only at /work/node_modules, so `require` from /work/target or /work/scratch resolves them."
+example = "node /work/scratch/check.js"
+advisories = [
+  "https://github.com/advisories/GHSA-gcx5-hxj7-gpqq",
+  "https://github.com/advisories/GHSA-qw35-55vc-rhgj",
+  "https://github.com/advisories/GHSA-8hq7-ggx2-cc6m",
+  "https://github.com/advisories/GHSA-24ch-f2g6-9hhh",
+  "https://github.com/advisories/GHSA-26wq-p25c-j6fv",
+  "https://github.com/advisories/GHSA-8f34-f56x-9xph",
+  "https://github.com/advisories/GHSA-5x5g-h9x8-2fh9",
+]

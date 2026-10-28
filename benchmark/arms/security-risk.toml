@@ -1,0 +1,7 @@
+# The skill in this repository, at its current commit.
+name = "security-risk"
+skill_name = "security-risk"
+skill_path = "../.."
+prompt = "../prompts/security-risk.md"
+[env]
+CLAUDE_CODE_SUBAGENT_MODEL = "claude-opus-5-5"

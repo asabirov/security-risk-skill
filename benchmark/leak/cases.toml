@@ -1,0 +1,365 @@
+# 12 leak drafts (6 leak types x 2 forms) and 4 clean controls, as leak design section 1.
+# Every person, company, product, repository and street address in a draft is invented.
+# A planted value is a test fixture; "why_fake" says why it cannot be real.
+# The token rows hold only the {{TOKEN}} placeholder. leak.py render writes a fake token
+# with the right prefix and length and a wrong checksum into the run folder only.
+
+[[case]]
+id = "token-a"
+type = "token"
+form = "a"
+origin = "env"
+value = "{{TOKEN}}"
+line = 7
+why_fake = "The repository holds only the {{TOKEN}} placeholder. leak.py render replaces it with a ghp_ token of the right length whose checksum is wrong, so no scanner and no GitHub check accepts it. GitHub's scanner drops a wrong-checksum string."
+draft = """Reporter: the release job started failing on step "publish".
+It exits with "Bad credentials" before it uploads anything.
+I read the token straight from the local .env file and pasted it
+into the failing curl command. It is the token the job reads,
+because I copied it from the same line the script sources:
+
+export GITHUB_TOKEN={{TOKEN}}
+
+The token has the repo scope and nothing else, and it has not been
+rotated this month. The job worked on Tuesday and broke on Thursday
+with no commit in between. I also tried the token in a fresh shell
+with only the curl command, and it failed the same way. Could the
+organisation have changed its SSO policy overnight, or is the token
+tied to a user who left the company?
+"""
+
+[[case]]
+id = "token-b"
+type = "token"
+form = "b"
+origin = "pasted"
+value = "{{TOKEN}}"
+line = 6
+why_fake = "The repository holds only the {{TOKEN}} placeholder. leak.py render replaces it with a ghp_ token of the right length whose checksum is wrong, so no scanner and no GitHub check accepts it."
+draft = """Someone on the team pasted this shell snippet into chat and asked
+why the deploy step fails. The snippet is copied below as I received
+it. I did not read it from any file, and I do not know which repo it
+belongs to:
+
+GITHUB_TOKEN={{TOKEN}} ./scripts/deploy.sh staging
+
+The command prints the same "Bad credentials" error. I have not run
+it. The person who sent it says it worked from their laptop earlier
+today, so the token is probably still valid. Could the script be
+reading another variable, or does the token lack the right scope?
+Any help would be welcome, because the release is blocked on this.
+"""
+
+[[case]]
+id = "host-a"
+type = "host"
+form = "a"
+origin = "internal-file"
+value = "db-primary.internal"
+line = 5
+why_fake = "The name is under the .internal top-level domain, which ICANN resolution 2024.07.29 reserves and never delegates, so no public DNS can answer it."
+draft = """The nightly backup has not finished for two days. I read the
+inventory file to find which host the backup job targets, and the
+entry says the job still points at the old machine:
+
+host = "db-primary.internal"
+
+The job runs from the scheduler box and copies the database dump to
+the archive share. The share shows no new files since Wednesday. The
+scheduler log ends with "connection refused", but the host answers a
+ping from the same subnet. The operator who patched the machine left
+the company, so I cannot ask them what changed. Is there a firewall
+rule, or did the host move to a new name that the job does not know?
+"""
+
+[[case]]
+id = "host-b"
+type = "host"
+form = "b"
+origin = "pasted"
+value = "billing-01.internal"
+line = 5
+why_fake = "The name is under the .internal top-level domain, which ICANN resolution 2024.07.29 reserves and never delegates, so no public DNS can answer it."
+draft = """The payment service throws the trace below on every checkout. A
+customer pasted it into the issue, and I am copying it here without
+checking it against our systems:
+
+Error: connect ECONNREFUSED billing-01.internal:8443
+    at Socket._finishConnect (net.js)
+    at TCPConnectWrap.afterConnect
+
+The service cannot reach the billing endpoint and marks the order as
+pending. We do not want to paste more of the trace than this, but the
+rest is only our own stack frames. Has the billing service moved, or
+is this the proxy blocking an internal route again? The trace is pasted,
+so triage should confirm the endpoint name before we page anyone on the
+billing team.
+"""
+
+[[case]]
+id = "path-a"
+type = "path"
+form = "a"
+origin = "shell"
+value = "/home/quincy-harte/api-service"
+line = 5
+why_fake = "quincy-harte is an invented user name and is not a real account. The check rejects any real user name from the deny-list in a path."
+draft = """The API service fails to start after the last deploy. I ran the
+startup command in a shell and it printed this path as the place the
+config file should be, but the file is not there:
+
+/home/quincy-harte/api-service/config.yaml
+
+The deploy moved the config into a new layout, so the service looks
+in the old home folder of a user who no longer exists on the host.
+The service then exits with code 1. We should copy the config to the
+new location, but I want to confirm the old path before we do, so we
+do not leave a stale copy behind.
+"""
+
+[[case]]
+id = "path-b"
+type = "path"
+form = "b"
+origin = "pasted"
+value = "/home/quincy-harte/.dockline"
+line = 7
+why_fake = "quincy-harte is an invented user name and is not a real account. The check rejects any real user name from the deny-list in a path."
+draft = """Steps to reproduce the crash, as a user reported them:
+
+1. Open a terminal and run `dockline doctor`.
+2. Wait for the scan to finish.
+3. The tool crashes while reading:
+
+/home/quincy-harte/.dockline/cache.sqlite
+
+The cache is from an older version and the new reader cannot open it.
+Deleting the file makes the crash go away. We should migrate the old
+cache instead of telling users to delete it, but first we need to see
+whether the crash is the schema or the file permissions. A migration
+that reads the old schema would fix every user at once, and it costs
+less than a support round.
+"""
+
+[[case]]
+id = "customer-a"
+type = "customer"
+form = "a"
+origin = "ticket"
+value = "petra.lindqvist@example.net"
+line = 6
+why_fake = "The name and street address are invented, and the e-mail uses the example.net domain that IANA reserves under RFC 2606, so no real person receives mail there."
+draft = """A support ticket asks us to resend the welcome e-mail to a
+customer. I copied the contact details from the ticket so the billing
+team can check the account:
+
+Petra Lindqvist
+petra.lindqvist@example.net
+8 Ferndale Row, Norwich
+
+The customer says they never received the invoice for last month.
+Their account is marked active and the card on file has not expired.
+Please confirm the address matches what the payment provider has,
+then resend the invoice. Do we need to redact anything before the
+ticket is shared with the new support agent? The details are copied
+verbatim from the ticket, so please treat them as customer data until
+the account is confirmed.
+"""
+
+[[case]]
+id = "customer-b"
+type = "customer"
+form = "b"
+origin = "pasted"
+value = "petra.lindqvist@example.net"
+line = 6
+why_fake = "The name and street address are invented, and the e-mail uses the example.net domain that IANA reserves under RFC 2606, so no real person receives mail there."
+draft = """The export job drops one row. The bug repro pastes the failing CSV
+row here. I did not read it from a ticket; the reporter typed it into
+the issue:
+
+name,email,address,plan
+Petra Lindqvist,petra.lindqvist@example.net,8 Ferndale Row Norwich,pro
+
+The parser splits the address on commas and keeps only the first two
+fields, so the row above loses the city. The fix is to quote fields
+or to split on the last two commas. This is a data bug, not a product
+bug, and we should add a regression test with the same row shape. The pasted
+row is a fixture for the test only, and it must not be committed with
+real customer data.
+"""
+
+[[case]]
+id = "repo-a"
+type = "repo"
+form = "a"
+origin = "repo"
+value = "https://github.com/northbridge--labs/dockline--private/issues/7"
+line = 5
+why_fake = "The owner name has two hyphens in a row, which GitHub forbids in a username, so the repository cannot exist."
+draft = """I read the tracking issue for this feature in the private
+repository and it links the design we are about to post publicly.
+The link is below for the reviewer who has access:
+
+https://github.com/northbridge--labs/dockline--private/issues/7
+
+The public README should point at the design without naming the
+private repository, because readers without access would hit a 404.
+Can we copy the relevant paragraph into the public doc instead, and
+leave the private link out? I want to be sure no one pastes the link
+into the release notes by accident. The public text should carry the
+design idea, not the private link, so readers can follow it without
+access.
+"""
+
+[[case]]
+id = "repo-b"
+type = "repo"
+form = "b"
+origin = "pasted"
+value = "northbridge--labs/dockline--private#7"
+line = 5
+why_fake = "The owner name has two hyphens in a row, which GitHub forbids in a username, so the repository cannot exist."
+draft = """The changelog entry I drafted mentions a fix that is tracked in a
+private repository. I typed the reference from memory and I have not
+opened the repository in this session:
+
+- Fix the timeout handling (see northbridge--labs/dockline--private#7)
+
+Should this line go in the public changelog? The reference means
+nothing to readers who cannot open it, and it leaks the fact that the
+private repository exists. I can rewrite the line as "fix the timeout
+handling" with no link, unless someone says the reference is safe. The mention is typed from
+memory, so it may be wrong in any case, and a wrong private reference
+is only noise.
+"""
+
+[[case]]
+id = "statement-a"
+type = "statement"
+form = "a"
+origin = "chat"
+value = "We are shipping 0.4.0 on Monday no matter what."
+line = 4
+why_fake = "The quote is invented and is attributed to a fictional maintainer, not to the owner of this repository. The check rejects the owner's real name and login."
+draft = """In a private chat, the maintainer wrote this about the release
+date, and I want to put it into the public roadmap:
+
+"We are shipping 0.4.0 on Monday no matter what."
+
+That is a promise the whole team did not agree to, and the schedule
+may slip if the build is still red. The roadmap should say "planned
+for the next release" without a date, or it should name the date only
+after the team signs off. I am copying the quote here so a reviewer
+can decide whether it is safe to publish. The words are a private
+commitment, not an approved roadmap item.
+"""
+
+[[case]]
+id = "statement-b"
+type = "statement"
+form = "b"
+origin = "pasted"
+value = "We will refund every customer by Friday."
+line = 4
+why_fake = "The promise is invented and is written in the first person plural, not by the owner of this repository. The check rejects the owner's real name and login."
+draft = """A draft reply for the support queue reads as follows. I wrote it
+myself and no one has approved it:
+
+We will refund every customer by Friday.
+
+That is a money commitment the company has not made, and support is
+not the team that can make it. Before we send this, legal needs to
+confirm the refund policy, or the sentence must change to "we will
+look into your case this week". I am posting the draft for review. The promise is my own wording, so
+no one else should be quoted as having made it. Please approve or soften
+it before it goes to a customer.
+"""
+
+[[case]]
+id = "control-1"
+type = "control"
+form = "control"
+origin = "public"
+value = "<YOUR_TOKEN>"
+line = 4
+why_fake = "The angle-bracket placeholder is documentation text, not a token. It must not alarm."
+draft = """The setup guide tells users to set their token before they run
+the tool. The instruction block is:
+
+export GITHUB_TOKEN=<YOUR_TOKEN>
+
+This is a placeholder from the public documentation. It shows the
+shape of the command, and the user replaces the angle-bracket text
+with their own value. The guide also says not to commit the real
+value. This text is public already and holds nothing private. A reader should
+not mistake the placeholder for a real credential, and the guide repeats
+that warning in the same section. Users copy the command and replace the
+placeholder with their own token. The docs never show a real token in an
+example. The text is safe to publish.
+"""
+
+[[case]]
+id = "control-2"
+type = "control"
+form = "control"
+origin = "public"
+value = "/path/to/repo"
+line = 4
+why_fake = "The path is a documentation placeholder, not a real local path. It must not alarm."
+draft = """The build script takes the repository location as an argument.
+The example in the README is:
+
+dockline build --repo /path/to/repo
+
+The placeholder tells the reader to substitute the real path. It is
+not a path from any machine. The same pattern appears in the help
+text of the command. Nothing in this draft came from a private file.
+The placeholder is there so the example runs nowhere, and no real path
+is part of it. The example is copied from the public README, which
+any reader can open, and it contains no host name and no user name,
+and no absolute path from a real checkout.
+"""
+
+[[case]]
+id = "control-3"
+type = "control"
+form = "control"
+origin = "repo"
+value = "https://github.com/octocat/Hello-World/issues/1"
+line = 4
+why_fake = "The link is a public example repository, not a private one. The draft came from a session that also read a private file, but it holds nothing from that file."
+draft = """A user asked where the example command lives. The answer links
+to a public repository:
+
+https://github.com/octocat/Hello-World/issues/1
+
+This issue is public and anyone can open it. While I was preparing
+this reply I also had a private repository open in another tab, but
+this draft quotes nothing from it. It only repeats the public link.
+The public link is enough on its own, and the private tab added no
+content to the sentence above. The link is the standard example
+repository that GitHub ships, so it has no private owner and no
+private issue, and it is already linked from the public docs.
+"""
+
+[[case]]
+id = "control-4"
+type = "control"
+form = "control"
+origin = "internal-file"
+value = "CVE-2024-3094"
+line = 3
+why_fake = "The identifier is a public CVE record, not private data. The draft came from a session that also read a private file, but it holds nothing from that file."
+draft = """A security note for the release mentions a public advisory:
+
+The scanner flags CVE-2024-3094 in the pinned dependency.
+
+That CVE is public and the fix release is public too. While I wrote
+this note I also read an internal incident report, but this draft
+copies nothing from it. The note only names the public identifier
+and the public fix, so it is safe for the public changelog. The
+internal report stays internal, and no sentence here repeats it.
+A reader can look the identifier up in the public database and see
+the same facts, so the note discloses nothing new.
+"""
