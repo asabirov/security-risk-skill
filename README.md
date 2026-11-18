@@ -23,7 +23,7 @@ Before any testing, the skill tells the agent to confirm the target, the authori
 | Dependency | Why you need it |
 | --- | --- |
 | Node.js 22.20.0 or later, with npm | `npx` runs the skills CLI, and the skills CLI 1.9.0 needs this Node.js version. |
-| Git | The skills CLI uses Git to fetch the repository at the release tag. |
+| Git | The skills CLI uses Git to fetch the repository. |
 
 The skill itself has no dependencies. The benchmark has its own dependencies. They are in [benchmark/README.md](benchmark/README.md).
 
