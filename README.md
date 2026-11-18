@@ -29,13 +29,19 @@ The skill itself has no dependencies. The benchmark has its own dependencies. Th
 
 ## Install
 
-Run this command. It installs release v0.2.2, the newest release, for Claude Code and Codex:
+Install the latest version:
 
 ```sh
-DO_NOT_TRACK=1 npx skills add https://github.com/asabirov/security-risk-skill/tree/v0.2.2 --skill security-risk --agent claude-code codex --global
+DO_NOT_TRACK=1 npx skills add https://github.com/asabirov/security-risk-skill --skill security-risk --agent claude-code codex --global
 ```
 
-`DO_NOT_TRACK=1` turns off the telemetry of the skills CLI. To update, take the newest tag from the releases page of the repository, and run the command again with that tag. To go back, run it again with the older tag.
+Update it later:
+
+```sh
+DO_NOT_TRACK=1 npx skills update security-risk --global
+```
+
+`DO_NOT_TRACK=1` turns off the telemetry of the skills CLI. The CLI needs Node.js, npm and Git.
 
 ## Use
 
