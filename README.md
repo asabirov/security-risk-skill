@@ -55,6 +55,25 @@ The skill version lives in `metadata.version` in `SKILL.md`. The changes for eac
 
 The benchmark in [benchmark/README.md](benchmark/README.md) counts how many known security advisories an audit skill finds in three open-source libraries. It can run this skill and other skills on the same targets.
 
+The [live run of 2026-10-28](benchmark/results/2026-10-28-live.md) ran this skill on `claude-opus-5-5`, with three repeats, on three targets that hold 20 advisories.
+
+| Measure | Result |
+| --- | --- |
+| Score | 10.5 |
+| Strict score | 10.5 |
+| Mean cost of one pass over the three targets, without the judge | 2.31 USD |
+| Mean tokens of one pass over the three targets, without the judge | 1,623,699 (about 1.6 million) |
+| Void skill sessions | 4 of 9 |
+
+An exact finding scores 1 and a partial finding scores 0.5. A partial note scores 0.5 in the score and 0 in the strict score. A false finding scores minus 0.5. The rules are in [Scoring](benchmark/README.md#scoring).
+
+The result has these limits:
+
+- Only this skill ran. The [trial 2 summary](benchmark/results/2026-10-22-trial2.md) holds the comparison with another skill.
+- The means cover only the sessions that passed. They use two runs for `fast-jwt` and `mistune` and one run for `msgpack5`, not three, because of the four void sessions.
+- The result file holds no cost for the four void sessions, so the full run cost more.
+- The run used a private rootless Docker daemon on the shared host, with no other container activity.
+
 ## Licence
 
 MIT. See `LICENSE`.
