@@ -32,7 +32,7 @@ The skill itself has no dependencies. The benchmark has its own dependencies. Th
 Install the latest version:
 
 ```sh
-DO_NOT_TRACK=1 npx skills add https://github.com/asabirov/security-risk-skill --skill security-risk --agent claude-code codex --global
+DO_NOT_TRACK=1 npx skills add https://github.com/asabirov/security-risk-skill --skill security-risk --agent claude-code codex --global -y
 ```
 
 Update it later:
